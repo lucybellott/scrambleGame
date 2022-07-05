@@ -5,7 +5,10 @@ import {useState, useEffect} from 'react'
 function App() {
   
   const [phrase, setPhrase] = useState("")
-  const [guess, setGuess] = useState("")
+  const [guess, setGuess] = useState([{
+    //id: 1,
+    word: ""
+  }])
 
   useEffect(() => {
     fetch('https://api.hatchways.io/assessment/sentences/1')
@@ -52,12 +55,15 @@ function App() {
 
  let shuffledPhrase = shuffled.join(" ")
 
- function handleChange(e) {
-    setGuess(e.target.value)
+ function handleChange(e, i) {
+   const inputValues = [...guess]
+   inputValues[i][e.target.name] = e.target.value
+    setGuess(inputValues)
+    console.log(inputValues)
  }
 
- let inputGenerator = shuffled.map(item => {
-    return  <input onChange={handleChange} value={guess} type="text"></input>
+ let inputGenerator = shuffled.map((item, i) => {
+    return  <input onChange={e => handleChange(e, i)} value={guess.word} name="word" type="text"></input>
  })
   
   
