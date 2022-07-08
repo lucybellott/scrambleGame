@@ -59,11 +59,12 @@ function App() {
    const inputValues = [...guess]
    inputValues[i][e.target.name] = e.target.value
     setGuess(inputValues)
-    console.log(inputValues)
+    //console.log(inputValues)
  }
 
  let inputGenerator = shuffled.map((item, i) => {
-    return  <input onChange={e => handleChange(e, i)} value={guess.word} name="word" type="text"></input>
+  <div> key={i}</div>
+   return  <input onChange={e => handleChange(e, i)} value={guess.word} name="word" type="text"></input>
  })
   
   
